@@ -14,10 +14,10 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 // 定义应用的基本信息常量
-const APP_NAME = "Lawbot UI"
-const APP_DEFAULT_TITLE = "Lawbot UI"
-const APP_TITLE_TEMPLATE = "%s - Lawbot UI"
-const APP_DESCRIPTION = "Lawbot UI PWA!"
+const APP_NAME = "Travelbot UI"
+const APP_DEFAULT_TITLE = "Travelbot UI"
+const APP_TITLE_TEMPLATE = "%s - Travelbot UI"
+const APP_DESCRIPTION = "Travelbot UI PWA!"
 
 // 定义根布局组件的属性接口
 interface RootLayoutProps {
