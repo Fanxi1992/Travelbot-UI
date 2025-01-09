@@ -255,11 +255,11 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
 
         <div className="absolute bottom-[14px] right-3 cursor-pointer hover:opacity-50">
           {isGenerating ? (
-            <IconPlayerStopFilled
-              className="hover:bg-background animate-pulse rounded bg-transparent p-1"
-              onClick={handleStopMessage}
-              size={30}
-            />
+            <div className="loading-dots">
+              <div className="dot"></div>
+              <div className="dot"></div>
+              <div className="dot"></div>
+            </div>
           ) : (
             <IconSend
               className={cn(
@@ -267,9 +267,9 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
                 !userInput && "cursor-not-allowed opacity-50"
               )}
               onClick={() => {
-                if (!userInput) return
+                if (!userInput) return;
 
-                handleSendMessage(userInput, chatMessages, false)
+                handleSendMessage(userInput, chatMessages, false);
               }}
               size={30}
             />
