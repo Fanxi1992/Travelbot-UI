@@ -253,28 +253,28 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
           onCompositionEnd={() => setIsTyping(false)}
         />
 
-        <div className="absolute bottom-[14px] right-3 cursor-pointer hover:opacity-50">
-          {isGenerating ? (
-            <div className="loading-dots">
-              <div className="dot"></div>
-              <div className="dot"></div>
-              <div className="dot"></div>
-            </div>
-          ) : (
-            <IconSend
-              className={cn(
-                "bg-primary text-secondary rounded p-1",
-                !userInput && "cursor-not-allowed opacity-50"
-              )}
-              onClick={() => {
-                if (!userInput) return;
+      <div className="absolute bottom-[14px] right-3 cursor-pointer hover:opacity-50">
+        {isGenerating ? (
+          <div className="loading-dots flex items-center space-x-2">
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+          </div>
+        ) : (
+          <IconSend
+            className={cn(
+              "bg-primary text-secondary rounded p-1",
+              !userInput && "cursor-not-allowed opacity-50"
+            )}
+            onClick={() => {
+              if (!userInput) return;
 
-                handleSendMessage(userInput, chatMessages, false);
-              }}
-              size={30}
-            />
-          )}
-        </div>
+              handleSendMessage(userInput, chatMessages, false);
+            }}
+            size={30}
+          />
+        )}
+      </div>
       </div>
     </>
   )

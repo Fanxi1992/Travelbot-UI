@@ -107,13 +107,12 @@
 /* Dot styles */
 .loading-dots {
   display: flex;
-  gap: 5px;
+  gap: 5px; /* 已经在 JSX 中设置 */
   align-items: center;
   height: 30px;
-  margin-right: 5px; /* 调整右边距 */
 }
 
-.dot {
+.loading-dots .dot { /* 增加特异性 */
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -121,15 +120,15 @@
   animation: dot-animation 1.4s ease-in-out infinite;
 }
 
-.dot:nth-child(1) {
+.loading-dots .dot:nth-child(1) { /* 增加特异性 */
   animation-delay: 0s;
 }
 
-.dot:nth-child(2) {
+.loading-dots .dot:nth-child(2) { /* 增加特异性 */
   animation-delay: 0.2s;
 }
 
-.dot:nth-child(3) {
+.loading-dots .dot:nth-child(3) { /* 增加特异性 */
   animation-delay: 0.4s;
 }
 
