@@ -22,22 +22,10 @@ export async function POST(request: Request) {
  // --- 特例分支：模拟流式返回包含 Markdown 表格的纯文本 ---
  if (message_match === "请帮我设计一份新加坡5天4晚的旅游行程") {
   // 添加2秒延迟,模拟思考时间
-  await new Promise(resolve => setTimeout(resolve, 5000));
+  await new Promise(resolve => setTimeout(resolve, 8000));
   
   const fixedResponse = `
-详细行程
-
-以下是行程概要：
-
-| 日期   | 上午             | 下午           | 晚上         |
-|------|----------------|----------------|--------------|
-| 第一天  | 抵达樟宜机场，前往酒店 | 滨海湾花园       | 滨海湾灯光秀   |
-| 第二天  | 小印度文化体验     | 阿拉伯街与牛车水  | 克拉码头晚餐与夜生活 |
-| 第三天  | 新加坡动物园       | 自然探险与夜间动物园 | 自由活动       |
-| 第四天  | 乌节路购物       | 新加坡摩天轮     | 江边散步与滨海湾之夜 |
-| 第五天  | 最后购物         | 返回酒店，准备离境 | 离开新加坡     |
-
-更详细的每日安排如下：
+***详细行程***
 
 **第一天：抵达新加坡**
 - 交通选择：
@@ -83,6 +71,18 @@ export async function POST(request: Request) {
 - 午餐：当地特色餐厅
 - 准备离境：根据航班时间返回酒店取行李，前往樟宜机场
 
+
+
+***以下是行程总结：***
+
+| 日期   | 上午             | 下午           | 晚上         |
+|------|----------------|----------------|--------------|
+| 第一天  | 抵达樟宜机场，前往酒店 | 滨海湾花园       | 滨海湾灯光秀   |
+| 第二天  | 小印度文化体验     | 阿拉伯街与牛车水  | 克拉码头晚餐与夜生活 |
+| 第三天  | 新加坡动物园       | 自然探险与夜间动物园 | 自由活动       |
+| 第四天  | 乌节路购物       | 新加坡摩天轮     | 江边散步与滨海湾之夜 |
+| 第五天  | 最后购物         | 返回酒店，准备离境 | 离开新加坡     |
+
 如果您有任何其他需求或问题，欢迎随时提出！希望这份专业而细致的旅游计划能够帮助您充分利用在新加坡的每一天。
   `.trim();
 
@@ -93,7 +93,9 @@ export async function POST(request: Request) {
     async start(controller) {
       for (const chunk of chunks) {
         controller.enqueue(encoder.encode(chunk));
-        await new Promise(resolve => setTimeout(resolve, 300)); // 添加延迟，模拟流式效果
+        // 生成一个在300ms上下30%范围内的随机延迟
+        const randomDelay = 100 * (1 + (Math.random() * 0.6 - 0.3)); // 0.7到1.3之间的随机数乘以300
+        await new Promise(resolve => setTimeout(resolve, randomDelay));
       }
       controller.close();
     },
