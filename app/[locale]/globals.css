@@ -146,3 +146,48 @@
     transform: translateY(0);
   }
 }
+
+
+
+/* Dot styles */
+.loading-dots {
+  display: flex;
+  gap: 5px; /* 已经在 JSX 中设置 */
+  align-items: center;
+  height: 30px;
+}
+
+.loading-dots .dot { /* 增加特异性 */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #666; /* 或其他你喜欢的颜色 */
+  animation: dot-animation 1.4s ease-in-out infinite;
+}
+
+.loading-dots .dot:nth-child(1) { /* 增加特异性 */
+  animation-delay: 0s;
+}
+
+.loading-dots .dot:nth-child(2) { /* 增加特异性 */
+  animation-delay: 0.2s;
+}
+
+.loading-dots .dot:nth-child(3) { /* 增加特异性 */
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-animation {
+  0% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+}

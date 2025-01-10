@@ -21,6 +21,9 @@ export async function POST(request: Request) {
   try {
  // --- 特例分支：模拟流式返回包含 Markdown 表格的纯文本 ---
  if (message_match === "请帮我设计一份新加坡5天4晚的旅游行程") {
+  // 添加2秒延迟,模拟思考时间
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
   const fixedResponse = `
 详细行程
 
