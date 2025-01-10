@@ -89,6 +89,24 @@ export const fetchOpenRouterModels = async () => {
 
     const { data } = await response.json()
 
+    const travelbotModel: OpenRouterLLM = {
+      modelId: "Travelbot" as LLMID,
+      modelName: "Travelbot",
+      provider: "openrouter",
+      hostedId: "travelbot",
+      platformLink: "https://example.com", // 随便给一个链接
+      imageInput: false,
+      maxContext: 4096, // 你可以根据需要设置
+      pricing: {
+        currency: "USD",
+        unit: "1M tokens",
+        inputCost: 0, // 或者是你想要的值
+        outputCost: 0 // 或者是你想要的值
+      }
+    }
+
+
+
     const openRouterModels = data.map(
       (model: {
         id: string
@@ -104,6 +122,9 @@ export const fetchOpenRouterModels = async () => {
         maxContext: model.context_length
       })
     )
+
+    
+    openRouterModels.unshift(travelbotModel);
 
     return openRouterModels
   } catch (error) {
