@@ -276,11 +276,11 @@ export const Message: FC<MessageProps> = ({
                   case "none":
                     return (
                       <div className="flex items-center space-x-2">
-                        <div className="text-base italic font-bold">Travelbot思考中</div>
+                        <div className="text-base italic font-bold"></div>
                         <div className="loading-dots flex items-center space-x-1">
+                            {/* <div className="dot"></div>
                             <div className="dot"></div>
-                            <div className="dot"></div>
-                            <div className="dot"></div>
+                            <div className="dot"></div> */}
                         </div>
                       </div>
                     )
