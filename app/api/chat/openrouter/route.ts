@@ -17,7 +17,6 @@ export async function POST(request: Request) {
   // 对特定问题进行伪造回答
   const message_match = messages[1].content
   console.log("for openrouter,打印重要的请求体messages", message_match)
-
   try {
  // --- 特例分支：模拟流式返回包含 Markdown 表格的纯文本 ---
  if (message_match === "请帮我设计一份新加坡5天4晚的旅游行程") {
@@ -87,14 +86,21 @@ export async function POST(request: Request) {
   `.trim();
 
   const encoder = new TextEncoder();
-  const chunks = fixedResponse.split('\n').map(line => line + '\n'); // 将内容按行分割
-
+  // 将整个文本转换为字符数组
+  const chars = [...fixedResponse];
+  
   const stream = new ReadableStream({
     async start(controller) {
-      for (const chunk of chunks) {
+      let position = 0;
+      while (position < chars.length) {
+        // 随机生成每次发送的字符数(1-3个字符)
+        const chunkSize = Math.floor(Math.random() * 3) + 1;
+        const chunk = chars.slice(position, position + chunkSize).join('');
         controller.enqueue(encoder.encode(chunk));
-        // 生成一个在300ms上下30%范围内的随机延迟
-        const randomDelay = 100 * (1 + (Math.random() * 0.6 - 0.3)); // 0.7到1.3之间的随机数乘以300
+        position += chunkSize;
+        
+        // 生成一个在50ms上下30%范围内的随机延迟
+        const randomDelay = 20 * (1 + (Math.random() * 0.6 - 0.3)); 
         await new Promise(resolve => setTimeout(resolve, randomDelay));
       }
       controller.close();
